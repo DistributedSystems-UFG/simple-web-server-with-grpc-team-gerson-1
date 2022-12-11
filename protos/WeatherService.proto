@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.examples.iotservice";
+option java_outer_classname = "IoTServiceProto";
+option objc_class_prefix = "TEMP";
+
+package weather_service;
+
+service WeatherService {
+
+  rpc CreateWeatherEvent (WeatherEvent) returns (StatusReply) {}
+
+  rpc SearchEvents(Query) returns (WeatherEventList) {}
+
+}
+
+message Location {
+    double latitude = 1;
+    double longitude = 2;
+}
+
+message Query {
+    optional string date = 1;
+    optional Location location = 2;
+}
+
+message WeatherEvent {
+    string date = 1;
+    Location location = 2;
+    double temperature = 3;   
+}
+
+message StatusReply {
+    string status = 1;
+}
+
+message WeatherEventList {
+    repeated WeatherEvent weather_event_data = 1;
+}
+  

@@ -1,0 +1,28 @@
+version: "3.2"
+services:
+  server:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.server
+    environment:
+      - PYTHONUNBUFFERED=1
+    ports:
+      - "50051:50051"
+
+  producer:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.server
+    environment:
+      - PYTHONUNBUFFERED=1
+    depends_on:
+      - server
+
+  client:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.server
+    environment:
+      - PYTHONUNBUFFERED=1
+    depends_on:
+      - server
